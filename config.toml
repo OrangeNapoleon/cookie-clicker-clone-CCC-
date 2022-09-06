@@ -1,4 +1,7 @@
 #the file is small cause there isn't much to configure
+#DO NOT CHANGE THIS UNLESS YOU HAVE TO!
 screen.width = 1920
 screen.height = 1080
-#DO NOT CHANGE UNLESS YOU HAVE TO!
+
+#change this if you want 
+fullscreen = true

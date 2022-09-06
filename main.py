@@ -3,6 +3,7 @@
 import pygame
 from pygame.locals import *
 import pytomlpp
+import os
 
 pygame.init()
 pygame.font.init()
@@ -23,8 +24,16 @@ black = (0,0,0)
 #COLOUR
 
 #SCREEN
-screen = pygame.display.set_mode((swidth, sheight))
-
+if config_data['fullscreen'] == True:
+    if os.name == 'posix':
+        os.environ["SDL_VIDEO_CENTERED"] = "1"
+        info = pygame.display.Info()
+        width, height = info.current_w, info.current_h
+        screen = pygame.display.set_mode((width, height), pygame.NOFRAME)
+    else:
+        screen = pygame.display.set_mode((swidth, sheight), FULLSCREEN)
+else:
+    screen = pygame.display.set_mode((swidth, sheight))
 pygame.display.set_caption("cockie clicker")
 #SCREEN
 
