@@ -54,10 +54,12 @@ while True:
             exit()
         if event.type == MOUSEBUTTONDOWN and not pressed:
             pressed = True
-            l, m, r = pygame.mouse.get_pressed()
-            if l:
-                click += 1
-            txt = font.render('clicks: ' + str(click), False, black)
+            mouse_pos = pygame.mouse.get_pos()
+            if cookie.collidepoint(mouse_pos):
+                l,m,r = pygame.mouse.get_pressed()
+                if l:
+                    click += 1
+                txt = font.render('clicks: ' + str(click), False, black)
         if event.type == MOUSEBUTTONUP:
             pressed = False
 
