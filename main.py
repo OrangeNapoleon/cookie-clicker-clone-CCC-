@@ -6,6 +6,7 @@ import pytomlpp
 
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
 clock = pygame.time.Clock()
 
@@ -41,6 +42,8 @@ font = pygame.font.SysFont("MathJax_Typewriter", 50)
 txt = font.render('no clicks lollllll', False, black)
 #FONT
 
+fart = pygame.mixer.Sound('fart.wav')
+
 fps = 60
 
 pressed = False
@@ -59,6 +62,8 @@ while True:
                 l,m,r = pygame.mouse.get_pressed()
                 if l:
                     click += 1
+                if r:
+                    fart.play()
                 txt = font.render('clicks: ' + str(click), False, black)
         if event.type == MOUSEBUTTONUP:
             pressed = False
