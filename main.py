@@ -53,8 +53,17 @@ cookie.y = (sheight/2)-(cookie.height/2)
 
 #FONT
 font = pygame.font.SysFont("MathJax_Typewriter", 50)
+msg_font = pygame.font.SysFont("MathJax_Typewriter", 300)
 txt = font.render('no clicks lollllll', False, black)
+sign_txt = msg_font.render('', False, black)
+sign = False
+miner_count = font.render('', False, black)
+up1 = font.render('1-miner:100', False, black)
 #FONT
+
+#UPGRADES
+miners = 0
+#UPGRADES
 
 fart = pygame.mixer.Sound('fart.wav')
 
@@ -62,7 +71,7 @@ fps = 60
 
 pressed = False
 
-click = 0
+clicks = 0
 
 while True:
     for event in pygame.event.get():
@@ -70,19 +79,28 @@ while True:
             pygame.quit()
             exit()
         if event.type == KEYDOWN and fullscreen:
-            if event.type == K_ESC:
+            if event.key == K_ESCAPE:
                 pygame.quit()
                 exit()
+            if event.key == K_1:
+                if clicks >= 100:
+                    clicks -= 100
+                    miners += 1
+                    miner_count = font.render('minors: ' + str(miners), False, black)
+                    txt = font.render('no clicks lollllll', False, black)
+                else:
+                    sign_txt = msg_font.render('UR BROKE LMFAOOOOOOO', False, black)
+                    sign = True
         if event.type == MOUSEBUTTONDOWN and not pressed:
             pressed = True
             mouse_pos = pygame.mouse.get_pos()
             if cookie.collidepoint(mouse_pos):
                 l,_,r = pygame.mouse.get_pressed()
                 if l:
-                    click += 1
+                    clicks += 1
                 if r:
                     fart.play()
-                txt = font.render('clicks: ' + str(click), False, black)
+                txt = font.render('clicks: ' + str(clicks), False, black)
         if event.type == MOUSEBUTTONUP:
             pressed = False
 
@@ -90,6 +108,15 @@ while True:
 
     screen.blit(txt, (0,0))
     screen.blit(cookieimg, cookie)
+    screen.blit(up1, (0, sheight-100))
+    screen.blit(miner_count, (0, 60))
+    if sign:
+        sign = False
+        screen.blit(sign_txt, (0,sheight/2))
+        screen.blit(sign_txt, (0,sheight-300))
+        screen.blit(sign_txt, (0,0))
+        pygame.display.update()
+        pygame.time.wait(500)
 
     pygame.display.update()
     clock.tick(fps)
