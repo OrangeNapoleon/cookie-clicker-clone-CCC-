@@ -1,3 +1,4 @@
 #the file is small cause there isn't much to configure
-screen.width = 800
-screen.height = 600
+screen.width = 1920
+screen.height = 1080
+#DO NOT CHANGE UNLESS YOU HAVE TO!
