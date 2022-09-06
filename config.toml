@@ -4,4 +4,4 @@ screen.width = 1920
 screen.height = 1080
 
 #change this if you want 
-fullscreen = true
+fullscreen = false
