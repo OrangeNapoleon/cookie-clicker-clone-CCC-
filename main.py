@@ -16,6 +16,8 @@ config_data = pytomlpp.load('config.toml')
 
 swidth = config_data['screen']['width']
 sheight = config_data['screen']['height']
+
+fullscreen = config_data['fullscreen']
 #TOML
 
 #COLOUR
@@ -24,7 +26,7 @@ black = (0,0,0)
 #COLOUR
 
 #SCREEN
-if config_data['fullscreen'] == True:
+if fullscreen:
     if os.name == 'posix':
         os.environ["SDL_VIDEO_CENTERED"] = "1"
         info = pygame.display.Info()
@@ -34,7 +36,10 @@ if config_data['fullscreen'] == True:
         screen = pygame.display.set_mode((swidth, sheight), FULLSCREEN)
 else:
     screen = pygame.display.set_mode((swidth, sheight))
+
 pygame.display.set_caption("cockie clicker")
+icon = pygame.image.load("cookie_icn.png")
+pygame.display.set_icon(icon)
 #SCREEN
 
 #COOKIE
@@ -64,11 +69,15 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             exit()
+        if event.type == KEYDOWN and fullscreen:
+            if event.type == K_ESC:
+                pygame.quit()
+                exit()
         if event.type == MOUSEBUTTONDOWN and not pressed:
             pressed = True
             mouse_pos = pygame.mouse.get_pos()
             if cookie.collidepoint(mouse_pos):
-                l,m,r = pygame.mouse.get_pressed()
+                l,_,r = pygame.mouse.get_pressed()
                 if l:
                     click += 1
                 if r:
