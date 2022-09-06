@@ -16,7 +16,10 @@ swidth = config_data['screen']['width']
 sheight = config_data['screen']['height']
 #TOML
 
+#COLOUR
 white = (255, 255, 255)
+black = (0,0,0)
+#COLOUR
 
 #SCREEN
 screen = pygame.display.set_mode((swidth, sheight))
@@ -31,10 +34,11 @@ cookie = cookieimg.get_rect()
 
 cookie.x = (swidth/2)-(cookie.width/2)
 cookie.y = (sheight/2)-(cookie.height/2)
-#SCREEN
+#COOKE
 
 #FONT
-font = 0                #finish
+font = pygame.font.SysFont("MathJax_Typewriter", 50)
+txt = font.render('no clicks lollllll', False, black)
 #FONT
 
 fps = 60
@@ -53,12 +57,13 @@ while True:
             l, m, r = pygame.mouse.get_pressed()
             if l:
                 click += 1
-            print(click)
+            txt = font.render('clicks: ' + str(click), False, black)
         if event.type == MOUSEBUTTONUP:
             pressed = False
 
     screen.fill(white)
 
+    screen.blit(txt, (0,0))
     screen.blit(cookieimg, cookie)
 
     pygame.display.update()
