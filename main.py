@@ -63,6 +63,7 @@ up1 = font.render('1-miner:100', False, black)
 
 #UPGRADES
 miners = 0
+count = 0
 #UPGRADES
 
 fart = pygame.mixer.Sound('fart.wav')
@@ -103,6 +104,14 @@ while True:
                 txt = font.render('clicks: ' + str(clicks), False, black)
         if event.type == MOUSEBUTTONUP:
             pressed = False
+
+    if bool(miners):
+        txt = font.render('clicks: ' + str(clicks), False, black)
+        if count == 120:
+            count = 0
+            clicks += miners
+        else:
+            count += 1
 
     screen.fill(white)
 
