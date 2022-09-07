@@ -58,7 +58,7 @@ txt = font.render('no clicks lollllll', False, black)
 sign_txt = msg_font.render('', False, black)
 sign = False
 miner_count = font.render('', False, black)
-up1 = font.render('1-miner:100', False, black)
+up1 = font.render('1-miner:50', False, black)
 #FONT
 
 #UPGRADES
@@ -84,8 +84,8 @@ while True:
                 pygame.quit()
                 exit()
             if event.key == K_1:
-                if clicks >= 100:
-                    clicks -= 100
+                if clicks >= 50:
+                    clicks -= 50
                     miners += 1
                     miner_count = font.render('minors: ' + str(miners), False, black)
                     txt = font.render('no clicks lollllll', False, black)
@@ -106,10 +106,10 @@ while True:
             pressed = False
 
     if bool(miners):
-        txt = font.render('clicks: ' + str(clicks), False, black)
-        if count == 120:
+        txt = font.render('clicks: ' + str(int(clicks)), False, black)
+        if count == 60:
             count = 0
-            clicks += miners
+            clicks += 0.5 * miners
         else:
             count += 1
 
