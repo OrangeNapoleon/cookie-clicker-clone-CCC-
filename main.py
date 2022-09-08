@@ -58,11 +58,15 @@ txt = font.render('no clicks lollllll', False, black)
 sign_txt = msg_font.render('', False, black)
 sign = False
 miner_count = font.render('', False, black)
+factory_count = font.render('', False, black)
 up1 = font.render('1-miner:50', False, black)
+up2 = font.render('2-factory:100', False, black)
 #FONT
 
 #UPGRADES
+upgrade = True
 miners = 0
+factories = 0
 count = 0
 #UPGRADES
 
@@ -85,6 +89,7 @@ while True:
                 exit()
             if event.key == K_1:
                 if clicks >= 50:
+                    upgrade = True
                     clicks -= 50
                     miners += 1
                     miner_count = font.render('minors: ' + str(miners), False, black)
@@ -92,6 +97,13 @@ while True:
                 else:
                     sign_txt = msg_font.render('UR BROKE LMFAOOOOOOO', False, black)
                     sign = True
+            if event.key == K_2:
+                upgrade = True
+                if clicks >= 100:
+                    clicks -= 100
+                    factories += 1
+                    factory_count = font.render('fucktories: ' + str(factories), False, black)
+                    txt = font.render("no clicks lollllll", False, black)
         if event.type == MOUSEBUTTONDOWN and not pressed:
             pressed = True
             mouse_pos = pygame.mouse.get_pos()
@@ -105,11 +117,12 @@ while True:
         if event.type == MOUSEBUTTONUP:
             pressed = False
 
-    if bool(miners):
+    if bool(upgrade):
         txt = font.render('clicks: ' + str(int(clicks)), False, black)
         if count == 60:
             count = 0
             clicks += 0.5 * miners
+            clicks += factories
         else:
             count += 1
 
@@ -118,7 +131,9 @@ while True:
     screen.blit(txt, (0,0))
     screen.blit(cookieimg, cookie)
     screen.blit(up1, (0, sheight-100))
+    screen.blit(up2, (200, sheight-100))
     screen.blit(miner_count, (0, 60))
+    screen.blit(factory_count, (0, 80))
     if sign:
         sign = False
         screen.blit(sign_txt, (0,sheight/2))
