@@ -104,6 +104,9 @@ while True:
                     factories += 1
                     factory_count = font.render('fucktories: ' + str(factories), False, black)
                     txt = font.render("no clicks lollllll", False, black)
+                else:
+                    sign_txt = msg_font.render('UR BROKE LMFAOOOOOOO', False, black)
+                    sign = True
         if event.type == MOUSEBUTTONDOWN and not pressed:
             pressed = True
             mouse_pos = pygame.mouse.get_pos()
@@ -133,7 +136,7 @@ while True:
     screen.blit(up1, (0, sheight-100))
     screen.blit(up2, (200, sheight-100))
     screen.blit(miner_count, (0, 60))
-    screen.blit(factory_count, (0, 80))
+    screen.blit(factory_count, (0, 100))
     if sign:
         sign = False
         screen.blit(sign_txt, (0,sheight/2))
